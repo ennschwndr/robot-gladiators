@@ -1,7 +1,7 @@
 var fightOrSkip = function(){
     var promptFight = prompt("Would you like to FIGHT or SKIP this battle? Enter 'Fight' or 'SKIP' to choose.")
     if (promptFight === "skip" || promptFight === "SKIP"){
-        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+        var confirmSkip = window.confirm("Are you sure you'd like to skip?");
         if (confirmSkip){
             window.alert(playerInfo.name + " has decided to skip this fight.");
             playerInfo.money = playerInfo.money - 10; 
@@ -89,11 +89,26 @@ var startGame = function(){
 
 var endGame = function(){
 
-    if(playerInfo.health > 0){
-        window.alert("Great job! You survived the game. You now have a score of " + playerInfo.money + " .");
-    }
-    else {
-        window.alert("Your robot was lost in battle! You lost the game 😢")
+    //if(playerInfo.health > 0){
+        //window.alert("Great job! You survived the game. You now have a score of " + playerInfo.money + " .");
+   // }
+   // else {
+       // window.alert("Your robot was lost in battle! You lost the game 😢")
+   // }
+
+    window.alert("The game has ended. Let's see how you did!")
+
+    var highScore = localStorage.getItem("highscore");
+        if (highScore === null) {
+            highScore = 0;
+        }
+    if (playerInfo.money > highScore) {
+        localStorage.setItem ("highscore", playerInfo.money);
+        localStorage.setItem ("name", playerInfo.name);
+
+        alert(playerInfo.name + " now has the high score of " + playerInfo.money + " !")
+    }else{
+        alert(playerInfo.name + " did not be the high score of " + highScore + ". Maybe next time!")
     }
 
     var playAgainConfirm = window.confirm("Would you like to play again?"); 
